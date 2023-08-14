@@ -15,5 +15,5 @@ node_modules
 .vscode
 
 # Ignore config.js and .env
-config.js
+# config.js
 .env

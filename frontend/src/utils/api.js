@@ -13,7 +13,10 @@ class Api {
     }
 
     _request(url, options) {
-        return fetch(`${this._baseUrl}/${url}`, options).then(this._checkReply)
+        return fetch(`${this._baseUrl}/${url}`, {
+            ...options,
+            credentials: 'include'
+        }).then(this._checkReply)
     }
 
 
@@ -94,7 +97,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65/',
+    baseUrl: 'http://localhost:4000',
     headers: {
         authorization: '36c21e13-089d-4ac8-bd26-b85419c729aa',
         'Content-Type': 'application/json'

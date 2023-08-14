@@ -20,8 +20,7 @@ function Login({ handleLogin }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        auth.loginUser(formValue.email, formValue.password).then((data) => {
-            localStorage.setItem('jwt', data.token);  
+        auth.loginUser(formValue.email, formValue.password).then(() => {  
             handleLogin(formValue.email);
             navigate('/');
         }).catch((err) => { console.log(err) }); 

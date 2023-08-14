@@ -8,7 +8,6 @@ function Header({ email, isLoggedIn, setLoggedIn }) {
     const location = useLocation();
 
     function signOut() {
-        localStorage.removeItem('jwt');
         navigate('/signin');
         setLoggedIn(false);
     }

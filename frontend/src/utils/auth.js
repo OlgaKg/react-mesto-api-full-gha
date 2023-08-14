@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'http://localhost:4000';
 
 const checkReply = (res) => {
     if (res.ok) {
@@ -17,8 +17,10 @@ export const registerUser = (email, password) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
+        credentials: 'include',
     })
 };
 
@@ -27,18 +29,21 @@ export const loginUser = (email, password) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
+        credentials: 'include',
     })
 };
 
-export const getContent = (token) => {
+export const getContent = () => {
     return request(`users/me`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-        }
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
+        },
+        credentials: 'include',
     })
 };

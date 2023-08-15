@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://localhost:4000';
-// export const BASE_URL = 'https://api.ypmesto.nomoreparties.co';
+// export const BASE_URL = 'http://localhost:4000';
+export const BASE_URL = 'https://api.ypmesto.nomoreparties.co';
 
 const checkReply = (res) => {
     if (res.ok) {
@@ -18,7 +18,7 @@ export const registerUser = (email, password) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            // 'Access-Control-Allow-Origin': ['http://localhost:3000', 'https://ypmesto.nomoreparties.co'],
         },
         body: JSON.stringify({ email, password }),
         credentials: 'include',
@@ -30,7 +30,7 @@ export const loginUser = (email, password) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            // 'Access-Control-Allow-Origin': ['http://localhost:3000', 'https://ypmesto.nomoreparties.co'],
         },
         body: JSON.stringify({ email, password }),
         credentials: 'include',
@@ -43,7 +43,7 @@ export const getContent = () => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            // 'Access-Control-Allow-Origin': ['http://localhost:3000', 'https://ypmesto.nomoreparties.co'],
         },
         credentials: 'include',
     })

@@ -15,8 +15,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://api.ypmesto.nomoreparties.co'],
   credentials: true,
+  maxAge: 30,
 }));
 
 app.use(routes);

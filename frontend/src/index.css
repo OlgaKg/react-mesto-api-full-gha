@@ -59,6 +59,7 @@
 @import url(../src/blocks/popup/__registerStatus/_success/popup__registerStatus_success.css);
 @import url(../src/blocks/popup/__title/_register/popup__title_register.css);
 @import url(../src/blocks/popup/__container-register/popup__container-register.css);
+@import url(../src/blocks/loading/loading.css);
 
 body {
   background-color: #000;

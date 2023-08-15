@@ -35,7 +35,12 @@ function App() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const checkToken = () => {
+    useEffect(() => {
+        checkToken();
+        // eslint-disable-next-line
+    }, []);
+
+    function checkToken() {
         auth.getContent()
             .then((response) => {
                 if (!response) {
@@ -52,12 +57,32 @@ function App() {
     }
 
     useEffect(() => {
-        checkToken();
-    }, []);
+        function closeByEscape(evt) {
+            if (evt.key === 'Escape') {
+                closeAllPopups();
+            }
+        }
+        if (isOpen) {
+            document.addEventListener('keydown', closeByEscape);
+            return () => {
+                document.removeEventListener('keydown', closeByEscape);
+            }
+        }
+    }, [isOpen]);
 
-    if (isLoading === null) {
-        return <div class='loading'>Loading</div>//add style 
-    }
+    useEffect(() => {
+        if (isLoggedIn) {
+            Promise.all([api.getUserData(), api.getCards()])
+                .then(([userData, initialCards]) => {
+                    setCurrentUser(userData);
+                    setCards(initialCards);
+                }).catch((err) => { console.log(err) });
+        }
+    }, [isLoggedIn]);
+
+    if (isLoading) {
+        return <div className='loading'>Loading...</div>;
+      }
 
     function handleEditAvatarClick() {
         setEditAvatarPopupOpen(true);
@@ -84,20 +109,6 @@ function App() {
         setIsLoading(false);
         setRegisterPopupOpen(false)
     }
-
-    useEffect(() => {
-        function closeByEscape(evt) {
-            if (evt.key === 'Escape') {
-                closeAllPopups();
-            }
-        }
-        if (isOpen) {
-            document.addEventListener('keydown', closeByEscape);
-            return () => {
-                document.removeEventListener('keydown', closeByEscape);
-            }
-        }
-    }, [isOpen])
 
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i === currentUser._id);
@@ -162,16 +173,6 @@ function App() {
         setLoggedIn(true);
         setEmail(email);
     }
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            Promise.all([api.getUserData(), api.getCards()])
-                .then(([userData, initialCards]) => {
-                    setCurrentUser(userData);
-                    setCards(initialCards);
-                }).catch((err) => { console.log(err) });
-        }
-    }, [isLoggedIn]);
 
     return (
         <AppContext.Provider value={{ isLoading, closeAllPopups }}>

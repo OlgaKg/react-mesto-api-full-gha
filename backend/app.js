@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const routes = require('./routes/index');
 const errorHandler = require('./middlewares/errorHandler');
 const config = require('./config');
@@ -13,6 +15,7 @@ const app = express();
 app.use(requestLogger);
 app.use(express.json());
 app.use(cookieParser());
+app.use(helmet());
 
 app.use(cors({
   origin: ['http://localhost:3000', 'https://ypmesto.nomoreparties.co'],
@@ -25,6 +28,13 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
+
+app.use(limiter);
 
 app.use(routes);
 

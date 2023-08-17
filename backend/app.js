@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(helmet());
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://ypmesto.nomoreparties.co'],
+  origin: ['http://localhost:3001', 'https://ypmesto.nomoreparties.co'],
   credentials: true,
   maxAge: 30,
 }));

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as auth from '../utils/auth'
+import * as auth from '../utils/auth';
 
 function Login({ handleLogin }) {
     const [formValue, setFormValue] = useState({
         email: '',
         password: ''
     });
-    
+
     const navigate = useNavigate();
 
     const handleChange = (evt) => {
@@ -20,11 +20,13 @@ function Login({ handleLogin }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        auth.loginUser(formValue.email, formValue.password).then(() => {  
+        auth.loginUser(formValue.email, formValue.password).then(() => {
             handleLogin(formValue.email);
             navigate('/');
-        }).catch((err) => { console.log(err) }); 
-    }   
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
     return (
         <div className="auth">

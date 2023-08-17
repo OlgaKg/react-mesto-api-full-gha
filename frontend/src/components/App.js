@@ -48,7 +48,7 @@ function App() {
                 }
                 navigate(location.pathname);
                 setLoggedIn(true);
-                setEmail(response.data.email);
+                setEmail(response.email);
             })
             .catch(() => {
                 setLoggedIn(false);

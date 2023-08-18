@@ -100,7 +100,6 @@ const api = new Api({
     // baseUrl: 'http://localhost:3001',
     baseUrl: 'https://api.ypmesto.nomoreparties.co',
     headers: {
-        // authorization: '36c21e13-089d-4ac8-bd26-b85419c729aa',
         'Content-Type': 'application/json'
     }
 });
